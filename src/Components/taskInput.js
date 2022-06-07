@@ -1,91 +1,54 @@
-import React , { Component, useState } from 'react';
-import {
-    KeyboardAvoidingView,
-    TextInput,
-    Text,
-    View,
-    TouchableOpacity,
-    Keyboard,
-    StyleSheet,
-    ScrollView,
-    Button,
-} from 'react-native';
-import PropTypes from 'prop-types';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import React, {useState} from 'react';
+import { KeyboardAvoidingView, StyleSheet, View, TextInput, TouchableOpacity, Text } from "react-native";
 
-TaskInput = (props) => {
-    console.log("inside task input box")
+export default TaskInput = (props) => {
+    const [task, setTask] = useState();
 
-    const [task, setTask] = useState(null);
-    const [time, setTime] = useState(new Date());
+    const handleAddTask = (value) => {
+        props.addTask(value);
+        setTask(null);
+    }
 
     return (
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            >
-            <ScrollView 
-        showsVerticalScrollIndicator={false}
-        style={styles.content}>
-                <View>
-                    <TextInput
-                        editable
-                        style={styles.input}
-                        placeholder='Write a task'
-                        value={task}
-                        onChangeText={(text) => {
-                            setTask(text)
-                        }}
-                    >
-                    </TextInput>
-            <View style={styles.dateTime}>
-                <RNDateTimePicker mode="datetime" display="default" value={time} onChange={(event,date) => setTime(date)} />
-            </View>
-            </View>
-            <View style={styles.fixToText}>
-                <Button
-                title="save"
-                onPress={() => props.addTaskHandler(task,time)}
-                />
-            </View>
-            </ScrollView>
-                </KeyboardAvoidingView>
+        <KeyboardAvoidingView 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <TextInput style={styles.inputField} value={task} onChangeText={text => setTask(text)} placeholder={'Write a task'} placeholderTextColor={'#fff'}/>
+        <TouchableOpacity onPress={() => handleAddTask(task)}>
+          <View style={styles.button}>
+              <Text>+</Text>
+          </View>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
-    writeeTaskWrapper: {
-        flex: 1,
-        topPadding: 40,
-        marginTop: 150,
-        // position: 'absolute',
-        bottom: 5,
-        right: 2,
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-    },
-    dateTime: {
-        margin: 15,
-    },
-    fixToText: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      margin: 15,
-    },
-    content: {
-        overflow: 'scroll',
-    },
-    input: {
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        backgroundColor: '#FFF',
-        borderRadius: 60,
-        borderColor: '#C0C0C0',
+    container: {
+        borderColor: '#fff',
+        backgroundColor: '#9a4a70',
         borderWidth: 1,
-        width: 220,
-        marginTop: 40
-    }
-})
-
-export default TaskInput;
+        marginHorizontal: 20,
+        borderRadius: 12,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        position: 'absolute',
+        bottom: 20,
+    },
+    inputField: {
+        color: '#fff',
+        height: 50,
+        flex: 1,
+    },
+    button: {
+        height: 30,
+        width: 30,
+        borderRadius: 5,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+});

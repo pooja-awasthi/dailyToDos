@@ -1,54 +1,87 @@
-import React , { Component } from 'react';
-import { TextInput, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
-TaskView = (props) => {
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, } from "react-native";
+import AntIcon from "react-native-vector-icons/AntDesign";
+export default TaskView = (props) => {
     return (
-            <View style={styles.item}>
-            <View style={styles.itemLeft}>
-                <View style={styles.square}></View>
-                <Text style={styles.itemText}>{props.text}</Text>
+        <View style={styles.container}>
+            <View style={styles.indexContainer}>
+                <Text style={styles.index}>{props.index}</Text>
             </View>
-                <View style={styles.circular}></View>
-                </View>
+            <View style={styles.taskContainer}>
+                <Text style={styles.task}>{props.task.task}</Text>
+                {!props.task.isCompleted && 
+                    (<TouchableOpacity onPress={() => props.doneTask()}>
+                        <AntIcon
+                            name="checkcircle"
+                            color="white"
+                            // color="#ffa940"
+                            size={20}
+                        />
+                    </TouchableOpacity>)
+                }
+                <TouchableOpacity onPress={() => props.deleteTask()}>
+                    <View style={styles.button}>
+                    <Text>-</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        </View>
     );
 }
 
-const styles = StyleSheet.create({
-    item: {
-        backgroundColor: '#FFF',
-        padding: 15,
-        borderRadius: 10,
-        flexDirection: 'row',
-        alignItem: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 20,
-        marginTop: 20,
-    },
-    square: {
-        width: 24,
-        height: 24,
-        backgroundColor: '#55BCF6',
-        opacity: 0.4,
-        borderRadius: 5,
-        marginRight: 15,
-    },
-    itemLeft: {
-        flexDirection: 'row',
-        alignItem: 'center',
-        flexWrap: 'wrap',
-    },
-    itemTest: {
-        maxWidth: '80%',
-    },
-    circular: {
-        width: 12,
-        height: 12,
-        borderColor: '#55BCF6',
-        borderWidth: 2,
-        borderRadius: 5,
-        marginTop: 5,
-    }
-})
 
-export default TaskView;
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        marginHorizontal: 20,
+    },
+    indexContainer: {
+        backgroundColor: '#9a4a70', //'#3E3364',
+        borderRadius: 12,
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 50,
+        height: 50,
+    },
+    index: {
+        color: '#fff',
+        fontSize: 20,
+    },
+    taskContainer: {
+        backgroundColor: '#9a4a70',//'#3E3364',
+        borderRadius: 12,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flex: 1,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        minHeight: 50,
+    },
+    task: {
+        color: '#fff',
+        width: '66%',
+        fontSize: 16,
+    },
+    delete: {
+        marginLeft: 10,
+    },
+    button: {
+        height: 20,
+        width: 20,
+        borderRadius: 5,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonDone: {
+        height: 20,
+        width: '100%',
+        borderRadius: 7,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
