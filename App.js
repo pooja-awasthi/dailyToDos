@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, StyleSheet } from 'react-native';
-import TaskInput from './src/Components/TaskInput';
-import TaskView from './src/Components/TaskView';
+import TaskInput from './src/Components/taskInput';
+import TaskView from './src/Components/taskView';
 import {
   Text,
   Keyboard,
