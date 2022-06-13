@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import styles from './Styles/taskInputStyle';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 
-export default TaskInput = props => {
+export default TaskInput = (props) => {
   const [task, setTask] = useState();
 
-  const handleAddTask = value => {
+  const handleAddTask = (value) => {
     props.addTask(value);
     setTask(null);
   };
@@ -18,7 +18,7 @@ export default TaskInput = props => {
       <TextInput
         style={styles.inputField}
         value={task}
-        onChangeText={text => setTask(text)}
+        onChangeText={(text) => setTask(text)}
         placeholder={'Write a task'}
         placeholderTextColor={'#fff'}
       />
