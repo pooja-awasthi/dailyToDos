@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import TaskInput from './src/Components/taskInput';
 import TaskView from './src/Components/taskView';
-import {Text, Keyboard, ScrollView} from 'react-native';
+import {Keyboard, ScrollView} from 'react-native';
 import {Appbar} from 'react-native-paper';
+import styles from './style';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -12,17 +13,12 @@ export default function App() {
     if (task == null) {
       return;
     }
-    const newValue = {
-      task: task,
-      isCompleted: false,
-    };
-    ('');
-    const tempArray = [...tasks];
-    tempArray.push({
+    const tasksTempArray = [...tasks];
+    tasksTempArray.push({
       task: task,
       isCompleted: false,
     });
-    setTasks(tempArray);
+    setTasks(tasksTempArray);
     Keyboard.dismiss();
   };
 
@@ -31,12 +27,12 @@ export default function App() {
   };
 
   const doneTask = doneIndex => {
-    const CompletedObject = tasks.findIndex(
+    const CompletedTask = tasks.findIndex(
       (value, index) => index === doneIndex,
     );
-    const tempArray = [...tasks];
-    tempArray[CompletedObject].isCompleted = true;
-    setTasks(tempArray);
+    const tasksTempArray = [...tasks];
+    tasksTempArray[CompletedTask].isCompleted = true;
+    setTasks(tasksTempArray);
   };
 
   return (
@@ -64,27 +60,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#c59cc2',
-  },
-  appBar: {
-    backgroundColor: '#9a4a70',
-  },
-  heading: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '600',
-    marginTop: 30,
-    marginBottom: 10,
-    marginLeft: 20,
-  },
-  scrollView: {
-    marginBottom: 70,
-  },
-  taskContainer: {
-    marginTop: 20,
-  },
-});
