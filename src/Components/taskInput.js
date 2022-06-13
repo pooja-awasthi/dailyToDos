@@ -7,6 +7,7 @@ import {
   Text,
 } from 'react-native';
 import styles from './Styles/taskInputStyle';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 export default TaskInput = (props) => {
   const [task, setTask] = useState();
@@ -28,9 +29,7 @@ export default TaskInput = (props) => {
         placeholderTextColor={'#fff'}
       />
       <TouchableOpacity onPress={() => handleAddTask(task)}>
-        <View style={styles.button}>
-          <Text>+</Text>
-        </View>
+        <AntIcon name="upcircle" color="white" size={30} />
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

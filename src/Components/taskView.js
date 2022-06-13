@@ -18,7 +18,7 @@ export default TaskView = props => {
         )}
         <TouchableOpacity onPress={() => props.deleteTask()}>
           <View style={styles.button}>
-            <Text>-</Text>
+            <AntIcon name="delete" color="#9a4a70" />
           </View>
         </TouchableOpacity>
       </View>
