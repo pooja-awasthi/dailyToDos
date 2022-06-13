@@ -12,11 +12,11 @@ export default TaskView = props => {
       <View style={styles.taskContainer}>
         <Text style={styles.task}>{props.task.task}</Text>
         {!props.task.isCompleted && (
-          <TouchableOpacity onPress={() => props.doneTask()} >
+          <TouchableOpacity onPress={props.doneTask.bind(this)}>
             <AntIcon name="checkcircle" color="white" size={20} />
           </TouchableOpacity>
         )}
-        <TouchableOpacity onPress={() => props.deleteTask()}>
+        <TouchableOpacity onPress={props.deleteTask.bind(this)}>
           <View style={styles.button}>
             <AntIcon name="delete" color="#9a4a70" />
           </View>
