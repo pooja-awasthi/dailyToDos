@@ -1,54 +1,53 @@
 import React, {useState} from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import TaskInput from './src/Components/taskInput';
 import TaskView from './src/Components/taskView';
-import {
-  Text,
-  Keyboard,
-  ScrollView,
-} from 'react-native';
-import { Appbar } from 'react-native-paper';
+import {Text, Keyboard, ScrollView} from 'react-native';
+import {Appbar} from 'react-native-paper';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
 
-  const addTask = (task) => {
-    if (task == null) return;
+  const addTask = task => {
+    if (task == null) {
+      return;
+    }
     const newValue = {
       task: task,
       isCompleted: false,
-    };''
-    const tempArray = [...tasks]
+    };
+    ('');
+    const tempArray = [...tasks];
     tempArray.push({
       task: task,
       isCompleted: false,
     });
     setTasks(tempArray);
     Keyboard.dismiss();
-  }
+  };
 
-  const deleteTask = (deleteIndex) => {
+  const deleteTask = deleteIndex => {
     setTasks(tasks.filter((value, index) => index != deleteIndex));
-  }
+  };
 
-  const doneTask = (doneIndex) => {
-    const CompletedObject = tasks.findIndex((value, index) => index === doneIndex);
+  const doneTask = doneIndex => {
+    const CompletedObject = tasks.findIndex(
+      (value, index) => index === doneIndex,
+    );
     const tempArray = [...tasks];
     tempArray[CompletedObject].isCompleted = true;
     setTasks(tempArray);
-  }
+  };
 
   return (
     <View style={styles.container}>
-        <Appbar.Header
-          style={styles.appBar}
-          statusBarHeight={Platform.OS === "ios" ? 15 : StatusBar.currentHeight}
-        >
-          <Appbar.Content title="TODO LIST" subtitle="" />
-        </Appbar.Header>
+      <Appbar.Header
+        style={styles.appBar}
+        statusBarHeight={Platform.OS === 'ios' ? 15 : StatusBar.currentHeight}>
+        <Appbar.Content title="TODO LIST" subtitle="" />
+      </Appbar.Header>
       <ScrollView style={styles.scrollView}>
-        {
-        tasks.map((task, index) => {
+        {tasks.map((task, index) => {
           return (
             <View key={`${index}_taskList`} style={styles.taskContainer}>
               <TaskView
@@ -59,10 +58,9 @@ export default function App() {
               />
             </View>
           );
-        })
-      }
+        })}
       </ScrollView>
-      <TaskInput addTask={addTask}/>
+      <TaskInput addTask={addTask} />
     </View>
   );
 }
@@ -88,5 +86,5 @@ const styles = StyleSheet.create({
   },
   taskContainer: {
     marginTop: 20,
-  }
+  },
 });
